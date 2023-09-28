@@ -37,7 +37,7 @@ namespace LoggingKata
             logger.LogInfo("Create TacoBellPt POINT ");
 
             
-            Point tacoBellpoint = new Point
+            Point tacoBellpoint = new Point()
             {
                 Latitude = dblTacoLATPt1,
                 Longitude = dblTacoLONGPt2

@@ -43,41 +43,43 @@ namespace LoggingKata
 
             //HINT NESTED LOOPS SECTION---------------------
             // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
-            double longestDistance = 0;
-            double tmpMeters = 0;
-            double tmpMiles = 0;
-            string name1 = "";
-            string name2 = "";
+            //double longestDistance = 0;
+            //double tmpMeters = 0;
+            //double tmpMiles = 0;
+            //string name1 = "";
+            //string name2 = "";
+
+            ITrackable tacoBell1 = null;
+            ITrackable tacoBell2 = null;
+            double distance = 0;
 
             for (int i = 0; i < locations.Length; i++)
             {
+                var locA = locations[i];
                 GeoCoordinate geoCordA = new GeoCoordinate();
                 geoCordA.Latitude = locations[i].Location.Latitude;
                 geoCordA.Longitude = locations[i].Location.Longitude;
 
 
 
-                for (int j = i + 1; j < locations.Length; j++)
+                for (int j = 0; j < locations.Length; j++)
                 {
+                    var locB = locations[j];
                     GeoCoordinate geoCordB = new GeoCoordinate();
                     geoCordB.Latitude = locations[j].Location.Latitude;
                     geoCordB.Longitude = locations[j].Location.Longitude;
 
-                    tmpMeters = geoCordA.GetDistanceTo(geoCordB);
-                    tmpMiles = tmpMeters * 0.000621371;
+                    double distanceBetween = geoCordA.GetDistanceTo(geoCordB);                  
 
 
-                    if (tmpMiles > longestDistance)
+                    if (distanceBetween > distance)
                     {
-                        longestDistance = tmpMiles;
-                        name1 = locations[i].Name;
-                        name2 = locations[j].Name;
+                        distance = distanceBetween;
+                        tacoBell1 = locA;
+                        tacoBell2 = locB;
                     }
 
 
-                    Console.WriteLine($"Longest Distance in Miles: {longestDistance}, {name1}, {name2}");
-                    Console.WriteLine("Press Return To Continue> ");
-                    Console.ReadLine();
 
 
                     // Create a new corA Coordinate with your locA's lat and long
@@ -87,6 +89,9 @@ namespace LoggingKata
                     // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
 
             }         
+                    Console.WriteLine($"Longest Distance in Miles: {distance}, {tacoBell1.Name}, {tacoBell2.Name}");
+                    Console.WriteLine("Press Return To Continue> ");
+                    Console.ReadLine();
             
         }
     }
